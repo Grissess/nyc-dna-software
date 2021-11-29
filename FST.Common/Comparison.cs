@@ -264,6 +264,8 @@ namespace FST.Common
                     string raceName = eachRow.Field<string>("EthnicName");
                     float freqSum = GetFrenquencySum(unknownPair, comparisonLoci[i], raceName, dtFrequencies);
 
+                    comparisonData.InstLociSums.Add(new ComparisonData.LocusSum(comparisonLoci[i], raceName, freqSum));
+
                     if (freqSum >= 0.97)
                     {
                         blRemove = true;
@@ -840,7 +842,7 @@ namespace FST.Common
                                 string[] thisPair = permutationRowGenotypes[ind].alleles.Split(',');
                                 // this method chooses and performs the correct frequency calculation. 
                                 // theta is used in the calculation of homozygous genotypes (this means the same alleles twice)
-                                freVal = Frenquency(thisPair[0], thisPair[1], tblFreq, Theta);
+                                freVal = Frenquency(thisPair[0], thisPair[1], tblFreq, Theta, locus, race);
 
                                 // if we have a cache, then place the value in the cache
                                 if (perRaceLocusFrequencyCache != null)
@@ -1133,7 +1135,10 @@ namespace FST.Common
                     {
                         // if we haven't found the value in the cache, use the default
                         if (!found)
+                        {
                             newDr["freq"] = defaultFrequency;
+                            comparisonData.InstUsedRare.Add(new ComparisonData.RareCase("GetFrenquencySum", race, locus, val));
+                        }
 
                         dt.Rows.Add(newDr);
                     }
@@ -1202,7 +1207,10 @@ namespace FST.Common
                     {
                         // if we haven't found the value in the cache, use the default
                         if (!found)
+                        {
                             newDr["freq"] = defaultFrequency;
+                            comparisonData.InstUsedRare.Add(new ComparisonData.RareCase("GetFrenquencyTable", race, locus, val));
+                        }
 
                         dt.Rows.Add(newDr);
                     }
@@ -1265,7 +1273,7 @@ namespace FST.Common
         /// <param name="tblFreq"></param>
         /// <param name="Theta"></param>
         /// <returns></returns>
-        protected float Frenquency(string Asy, string Bsy, DataTable tblFreq, float Theta)
+        protected float Frenquency(string Asy, string Bsy, DataTable tblFreq, float Theta, string locus, string race)
         {
             float freq = 0;
             try
@@ -1277,6 +1285,7 @@ namespace FST.Common
                     if (tblFreq == null || tblFreq.Rows.Count == 0)
                     {
                         freq = (float)0.02;
+                        comparisonData.InstUsedRare.Add(new ComparisonData.RareCase("Frenquency(homozy null/empty freq table)", race, locus, Asy));
                     }
                     else
                     {
@@ -1292,8 +1301,12 @@ namespace FST.Common
                             else
                                 throw new Exception("duplicate Allele.");
                         }
-                        else // if we have no frequency values, use a default (this should never happen, but here it is)
+                        else
+                        {
+                            // if we have no frequency values, use a default (this should never happen, but here it is)
                             freq = (float)0.02;
+                            comparisonData.InstUsedRare.Add(new ComparisonData.RareCase("Frenquency(homozy not found)", race, locus, Asy));
+                        }
                     }
 
                     // calculate the homozygous genotype frequency: F = p * (p + (T * (1 - p)))
@@ -1309,6 +1322,7 @@ namespace FST.Common
                     {
                         a = (float)0.02;
                         b = (float)0.02;
+                        comparisonData.InstUsedRare.Add(new ComparisonData.RareCase("Frenquency(heterozy null/empty freq table)", race, locus, Asy + "," + Bsy));
                     }
                     else
                     {
@@ -1323,8 +1337,12 @@ namespace FST.Common
                             else
                                 throw new Exception("duplicate Allele.");
                         }
-                        else // if we have no frequency values, use a default (this should never happen, but here it is)
+                        else
+                        {
+                            // if we have no frequency values, use a default (this should never happen, but here it is)
                             a = (float)0.02;
+                            comparisonData.InstUsedRare.Add(new ComparisonData.RareCase("Frenquency(heterozy a not found)", race, locus, Asy));
+                        }
 
                         // get our Bsy allele frequency
                         key = "AlleleNo='" + Bsy.ToString() + "'";
@@ -1337,8 +1355,12 @@ namespace FST.Common
                             else
                                 throw new Exception("duplicate Allele.");
                         }
-                        else // if we have no frequency values, use a default (this should never happen, but here it is)
+                        else
+                        {
+                            // if we have no frequency values, use a default (this should never happen, but here it is)
                             b = (float)0.02;
+                            comparisonData.InstUsedRare.Add(new ComparisonData.RareCase("Frenquency(heterozy a not found)", race, locus, Asy));
+                        }
                     }
 
                     // calculate the heterozygous genotype frequency: F = 2 * p * q

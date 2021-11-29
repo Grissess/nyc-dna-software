@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.Reporting.WinForms;
+// using Microsoft.Reporting.WinForms;
 using System.Data;
 using System.Windows.Forms;
 
@@ -40,12 +40,63 @@ namespace FST.Common
         /// <returns>A string path to the saved report.</returns>
         public string Print(ComparisonData comparisonData)
         {
+            /// generate our filename
+            //string username = comparisonData.UserName.Substring(comparisonData.UserName.IndexOf('\\') + 1);
+            //string filename = outputPath + "FSTReport_" + username + "_" + DateTime.Now.Year.ToString().PadLeft(2, '0');
+            Dictionary<string, float> races = new Dictionary<string, float>();
+            races.Add("Asian", comparisonData.AsianLR);
+            races.Add("Black", comparisonData.BlackLR);
+            races.Add("Caucasian", comparisonData.CaucasianLR);
+            races.Add("Hispanic", comparisonData.HispanicLR);
+            Nullable<KeyValuePair<string, float>> minimum = null;
+            Int64 ts = (Int64)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
+            string dirname = outputPath + "fst." + ts + "." + comparisonData.Comparison1Name;
+            System.IO.Directory.CreateDirectory(dirname);
+            foreach (KeyValuePair<string, float> pair in races)
+            {
+                string filename = dirname + "\\" + pair.Key + ".txt";
+                if (minimum == null || pair.Value < minimum?.Value)
+                {
+                    minimum = new KeyValuePair<string, float>(filename, pair.Value);
+                }
+                System.IO.StreamWriter ofile = new System.IO.StreamWriter(filename);
+                ofile.WriteLine("Locus,LR,LRlog10");
+                if (Double.IsInfinity(Math.Log10(pair.Value)))
+                {
+                    ofile.WriteLine("_OVERALL_,0.0,-inf");
+                }
+                else
+                {
+                    ofile.WriteLine(String.Format("_OVERALL_,{0},{1}", pair.Value, Math.Log10(pair.Value)));
+                }
+                ofile.Flush();
+                ofile.Close();
+            }
+            System.IO.StreamWriter oifile = new System.IO.StreamWriter(dirname + "\\_instrumentation.txt");
+            oifile.Write("LociSum");
+            foreach (ComparisonData.LocusSum ls in comparisonData.InstLociSums)
+            {
+                oifile.Write("," + ls.Race + ":" + ls.Name + ":" + ls.Sum.ToString());
+            }
+            oifile.Write("\n");
+
+            oifile.Write("UsedRare");
+            foreach (ComparisonData.RareCase rc in comparisonData.InstUsedRare)
+            {
+                oifile.Write("," + rc.Race + ":" + rc.Location + ":" + rc.Locus + ":" + rc.Allele);
+            }
+            oifile.Write("\n");
+
+            oifile.Flush();
+            oifile.Close();
+            // oifile.Dispose();
+
+            return minimum?.Key;
+            /*
             // make ourselves a new instance of ReportViewer
             ReportViewer ReportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
 
-            /// generate our filename
-            string username = comparisonData.UserName.Substring(comparisonData.UserName.IndexOf('\\') + 1);
-            string filename = outputPath + "FSTReport_" + username + "_" + DateTime.Now.Year.ToString().PadLeft(2, '0');
+            
             filename += DateTime.Now.Month.ToString().PadLeft(2, '0');
             filename += DateTime.Now.Day.ToString().PadLeft(2, '0');
             filename += DateTime.Now.Hour.ToString().PadLeft(2, '0');
@@ -111,8 +162,8 @@ namespace FST.Common
             /// 
 
             System.IO.File.WriteAllBytes(filename, bytes);
-
-            return filename;
+            */
+            //return filename;
         }
     }
 

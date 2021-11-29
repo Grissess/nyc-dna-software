@@ -20,3 +20,15 @@ S:\FST\Min\FST_Production\FST.Web\obj\Debug\RdlCompile.cache
 S:\FST\Min\FST_Production\FST.Web\obj\Debug\RdlCompile.compiled
 S:\FST\Min\FST_Production\FST.Web\obj\Debug\FST.Web.dll
 S:\FST\Min\FST_Production\FST.Web\obj\Debug\FST.Web.pdb
+C:\Users\csguest\Desktop\FST\nyc-dna-software_at-head\FST.Web\bin\Images\banner.gif
+C:\Users\csguest\Desktop\FST\nyc-dna-software_at-head\FST.Web\bin\SETUP.BAT
+C:\Users\csguest\Desktop\FST\nyc-dna-software_at-head\FST.Web\bin\FST.Web.dll.config
+C:\Users\csguest\Desktop\FST\nyc-dna-software_at-head\FST.Web\bin\FST.Web.dll
+C:\Users\csguest\Desktop\FST\nyc-dna-software_at-head\FST.Web\bin\FST.Web.pdb
+C:\Users\csguest\Desktop\FST\nyc-dna-software_at-head\FST.Web\bin\FST.Common.dll
+C:\Users\csguest\Desktop\FST\nyc-dna-software_at-head\FST.Web\bin\FST.Common.pdb
+C:\Users\csguest\Desktop\FST\nyc-dna-software_at-head\FST.Web\obj\Debug\FST.Web.csprojAssemblyReference.cache
+C:\Users\csguest\Desktop\FST\nyc-dna-software_at-head\FST.Web\obj\Debug\FST.Web.csproj.CoreCompileInputs.cache
+C:\Users\csguest\Desktop\FST\nyc-dna-software_at-head\FST.Web\obj\Debug\FST.Web.csproj.CopyComplete
+C:\Users\csguest\Desktop\FST\nyc-dna-software_at-head\FST.Web\obj\Debug\FST.Web.dll
+C:\Users\csguest\Desktop\FST\nyc-dna-software_at-head\FST.Web\obj\Debug\FST.Web.pdb

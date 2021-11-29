@@ -606,6 +606,40 @@ namespace FST.Common
             public int UnknownCount { get; set; }
         }
 
+        // Grissess: Instrumentation for our research
+        public List<RareCase> InstUsedRare { get; set; } = new List<RareCase>();
+
+        public class RareCase
+        {
+            public string Location { get; }
+            public string Race { get; }
+            public string Locus { get; }
+            public string Allele { get; }
+
+            public RareCase(string location, string race, string locus, string allele)
+            {
+                Location = location;
+                Race = race;
+                Locus = locus;
+                Allele = allele;
+            }
+        }
+        public List<LocusSum> InstLociSums { get; set; } = new List<LocusSum>();
+
+        public class LocusSum
+        {
+            public string Name { get; }
+            public string Race { get; }
+            public float Sum { get; }
+
+            public LocusSum(string name, string race, float sum)
+            {
+                Name = name;
+                Race = race;
+                Sum = sum;
+            }
+        }
+
         /// <summary>
         /// This class copies the evidence replicate and profile data from the Dictionaries to the associated DictionaryProxies, 
         /// and then serializes the ComparisonData class to a string using XmlSerializer

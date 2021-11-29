@@ -308,7 +308,34 @@ namespace FST.Web
                 // add the alleles at each replicate
                 for (int replicate = 1; replicate <= 3; replicate++)
                     if (evidence.ContainsKey(locus.ToUpper()))
-                        unknownTable.Rows[replicate - 1][locus] = evidence[locus.ToUpper()][replicate].Trim();
+                        try
+                        {
+                            unknownTable.Rows[replicate - 1][locus] = evidence[locus.ToUpper()][replicate].Trim();
+                        }
+                        catch(KeyNotFoundException ex)
+                        {
+                            String message = String.Format("Failed to insert key, replicate={0}, locus={1}\nRows:", replicate, locus);
+                            int index = 0;
+                            foreach(DataRow row in unknownTable.Rows)
+                            {
+                                message += String.Format("{0}:\n", index);
+                                foreach(DataColumn field in unknownTable.Columns)
+                                {
+                                    message += String.Format("- {0}: {1}\n", field, row[field]);
+                                }
+                                index++;
+                            }
+                            message += "evidence:\n";
+                            foreach(KeyValuePair<String, Dictionary<Int32, String>> pair in evidence)
+                            {
+                                message += String.Format("{0}:\n", pair.Key);
+                                foreach(KeyValuePair<Int32, String> subpair in pair.Value)
+                                {
+                                    message += String.Format("- {0}: {1}\n", subpair.Key, subpair.Value);
+                                }
+                            }
+                            throw new Exception(message);
+                        }
             }
 
             return unknownTable;

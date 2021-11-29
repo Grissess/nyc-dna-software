@@ -27,3 +27,16 @@ S:\FST\Min\FST_Production\FSTServiceConsoleHost\bin\Debug\FST.Common.pdb
 S:\FST\Min\FST_Production\FSTServiceConsoleHost\obj\x86\Debug\FSTServiceConsoleHost.csprojResolveAssemblyReference.cache
 S:\FST\Min\FST_Production\FSTServiceConsoleHost\obj\x86\Debug\FSTServiceConsoleHost.exe
 S:\FST\Min\FST_Production\FSTServiceConsoleHost\obj\x86\Debug\FSTServiceConsoleHost.pdb
+C:\Users\csguest\Desktop\FST\nyc-dna-software_at-head\FSTServiceConsoleHost\bin\Debug\FSTServiceConsoleHost.exe.config
+C:\Users\csguest\Desktop\FST\nyc-dna-software_at-head\FSTServiceConsoleHost\bin\Debug\FSTServiceConsoleHost.exe
+C:\Users\csguest\Desktop\FST\nyc-dna-software_at-head\FSTServiceConsoleHost\bin\Debug\FSTServiceConsoleHost.pdb
+C:\Users\csguest\Desktop\FST\nyc-dna-software_at-head\FSTServiceConsoleHost\bin\Debug\FST_WindowsService.exe
+C:\Users\csguest\Desktop\FST\nyc-dna-software_at-head\FSTServiceConsoleHost\bin\Debug\FST.Common.dll
+C:\Users\csguest\Desktop\FST\nyc-dna-software_at-head\FSTServiceConsoleHost\bin\Debug\FST_WindowsService.pdb
+C:\Users\csguest\Desktop\FST\nyc-dna-software_at-head\FSTServiceConsoleHost\bin\Debug\FST_WindowsService.exe.config
+C:\Users\csguest\Desktop\FST\nyc-dna-software_at-head\FSTServiceConsoleHost\bin\Debug\FST.Common.pdb
+C:\Users\csguest\Desktop\FST\nyc-dna-software_at-head\FSTServiceConsoleHost\obj\x86\Debug\FSTServiceConsoleHost.csproj.CoreCompileInputs.cache
+C:\Users\csguest\Desktop\FST\nyc-dna-software_at-head\FSTServiceConsoleHost\obj\x86\Debug\FSTServiceConsoleHost.csproj.CopyComplete
+C:\Users\csguest\Desktop\FST\nyc-dna-software_at-head\FSTServiceConsoleHost\obj\x86\Debug\FSTServiceConsoleHost.exe
+C:\Users\csguest\Desktop\FST\nyc-dna-software_at-head\FSTServiceConsoleHost\obj\x86\Debug\FSTServiceConsoleHost.pdb
+C:\Users\csguest\Desktop\FST\nyc-dna-software_at-head\FSTServiceConsoleHost\obj\x86\Debug\FSTServiceConsoleHost.csproj.AssemblyReference.cache
